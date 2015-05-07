@@ -4,13 +4,13 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Parentezco */
+/* @var $model app\models\Matriculas */
 
-$this->title = $model->nombre_parentezco;
-$this->params['breadcrumbs'][] = ['label' => 'Parentezcos', 'url' => ['index']];
+$this->title = $model->cod_matricula;
+$this->params['breadcrumbs'][] = ['label' => 'Periodos Escolares', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="parentezco-view">
+<div class="matriculas-view">
     <h1 class="title-form" align="center"><?= Html::encode($this->title) ?></h1>
     <hr>
     <fieldset>
@@ -21,21 +21,24 @@ $this->params['breadcrumbs'][] = $this->title;
                         <?= DetailView::widget([
                             'model' => $model,
                             'attributes' => [
-                                //'id_parentezco',
-                                'nombre_parentezco',
+                                //'id_matricula',
+                                'cod_matricula',
+                                'id_facultad',
+                                'curso',
+                                'semestre',
                             ],
                         ]) ?>
                         <p align="right">
-                            <?= Html::a('Actualizar', ['update', 'id' => $model->id_parentezco], ['class' => 'btn btn-primary']) ?>
-                            <?= Html::a('Eliminar', ['delete', 'id' => $model->id_parentezco], [
+                            <?= Html::a('Actualizar', ['update', 'id' => $model->id_matricula], ['class' => 'btn btn-primary']) ?>
+                            <?= Html::a('Eliminar', ['delete', 'id' => $model->id_matricula], [
                                 'class' => 'btn btn-danger',
                                 'data' => [
-                                    'confirm' => '¿Está seguro de eliminar este parentezco?',
+                                    'confirm' => '¿Está seguro de eliminar este Periodo?',
                                     'method' => 'post',
                                 ],
                             ]) ?>
-                        </p>
-                    </div>
+                        </div>
+                    </p>
                 </div>
             </div>
         </div>

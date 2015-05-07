@@ -28,7 +28,7 @@ class Profesiones extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre_profesion'], 'required'],
+            [['nombre_profesion'], 'required', 'message'=>'Campo Obligatorio'],
             [['nombre_profesion'], 'string', 'max' => 50],
             [['nombre_profesion'], 'unique']
         ];

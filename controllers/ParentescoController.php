@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Parentezco;
-use app\models\ParentezcoSearch;
+use app\models\Parentesco;
+use app\models\ParentescoSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ParentezcoController implements the CRUD actions for Parentezco model.
+ * ParentescoController implements the CRUD actions for Parentesco model.
  */
-class ParentezcoController extends Controller
+class ParentescoController extends Controller
 {
     public function behaviors()
     {
@@ -27,12 +27,12 @@ class ParentezcoController extends Controller
     }
 
     /**
-     * Lists all Parentezco models.
+     * Lists all Parentesco models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ParentezcoSearch();
+        $searchModel = new ParentescoSearch();
         $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
 
         return $this->render('index', [
@@ -42,7 +42,7 @@ class ParentezcoController extends Controller
     }
 
     /**
-     * Displays a single Parentezco model.
+     * Displays a single Parentesco model.
      * @param integer $id
      * @return mixed
      */
@@ -54,16 +54,16 @@ class ParentezcoController extends Controller
     }
 
     /**
-     * Creates a new Parentezco model.
+     * Creates a new Parentesco model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Parentezco();
+        $model = new Parentesco();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_parentezco]);
+            return $this->redirect(['view', 'id' => $model->id_parentesco]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -72,7 +72,7 @@ class ParentezcoController extends Controller
     }
 
     /**
-     * Updates an existing Parentezco model.
+     * Updates an existing Parentesco model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
@@ -82,7 +82,7 @@ class ParentezcoController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id_parentezco]);
+            return $this->redirect(['view', 'id' => $model->id_parentesco]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -91,7 +91,7 @@ class ParentezcoController extends Controller
     }
 
     /**
-     * Deletes an existing Parentezco model.
+     * Deletes an existing Parentesco model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,15 +104,15 @@ class ParentezcoController extends Controller
     }
 
     /**
-     * Finds the Parentezco model based on its primary key value.
+     * Finds the Parentesco model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return Parentezco the loaded model
+     * @return Parentesco the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Parentezco::findOne($id)) !== null) {
+        if (($model = Parentesco::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

@@ -19,27 +19,27 @@ use app\models\Asignaturas;
     	<div class="row">
   		    <div class="col-lg-4 col-lg-offset-4">
       		    <div class="formularios">
-                    <?= $form->field($model, 'cod_grupo')->textInput(['maxlength' => 50]) ?>
+                    <?= $form->field($modelGru, 'cod_grupo')->textInput(['maxlength' => 50]) ?>
 
-                    <?= $form->field($model, 'id_tipo_grupo')->dropDownList(
+                    <?= $form->field($modelGru, 'id_tipo_grupo')->dropDownList(
                         ArrayHelper::map(TiposDeGrupo::find()->all(),
                         'id_tipo_grupo',
                         'nombre_tipo_grupo'))?>
 
-                    <?= $form->field($model, 'id_doc')->dropDownList(
+                    <?= $form->field($modelGru, 'id_doc')->dropDownList(
                         ArrayHelper::map(Docentes::find()->all(),
                         'id_doc',
                         'docentes'))?>
 
-                    <?= $form->field($model, 'id_asig')->dropDownList(
+                    <?= $form->field($modelGru, 'id_asig')->dropDownList(
                         ArrayHelper::map(Asignaturas::find()->all(),
                         'id_asig',
                         'nombre_asig')) ?>
 
-                    <?= $form->field($model, 'activo')->checkbox() ?>
-
+                    <?= $form->field($modelGru, 'activo')->checkbox() ?>
+  
                     <div class="form-group" align="right">
-                  		<?= Html::submitButton($model->isNewRecord ? 'Crear' : 'Actualizar', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                  		<?= Html::submitButton('Siguiente', ['class' => $modelGru->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
               		  </div>
               </div>
       		</div>

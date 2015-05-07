@@ -5,12 +5,12 @@ namespace app\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\Parentezco;
+use app\models\Parentesco;
 
 /**
- * ParentezcoSearch represents the model behind the search form about `app\models\Parentezco`.
+ * ParentescoSearch represents the model behind the search form about `app\models\Parentesco`.
  */
-class ParentezcoSearch extends Parentezco
+class ParentescoSearch extends Parentesco
 {
     /**
      * @inheritdoc
@@ -18,8 +18,8 @@ class ParentezcoSearch extends Parentezco
     public function rules()
     {
         return [
-            [['id_parentezco'], 'integer'],
-            [['nombre_parentezco'], 'safe'],
+            [['id_parentesco'], 'integer'],
+            [['nombre_parentesco'], 'safe'],
         ];
     }
 
@@ -41,7 +41,7 @@ class ParentezcoSearch extends Parentezco
      */
     public function search($params)
     {
-        $query = Parentezco::find();
+        $query = Parentesco::find();
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -56,10 +56,10 @@ class ParentezcoSearch extends Parentezco
         }
 
         $query->andFilterWhere([
-            'id_parentezco' => $this->id_parentezco,
+            'id_parentesco' => $this->id_parentesco,
         ]);
 
-        $query->andFilterWhere(['like', 'nombre_parentezco', $this->nombre_parentezco]);
+        $query->andFilterWhere(['like', 'nombre_parentesco', $this->nombre_parentesco]);
 
         return $dataProvider;
     }

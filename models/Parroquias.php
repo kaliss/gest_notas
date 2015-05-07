@@ -30,7 +30,7 @@ class Parroquias extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_diocesis', 'nombre_parroquia'], 'required'],
+            [['id_diocesis', 'nombre_parroquia'], 'required', 'message'=>'Campo Obligatorio'],
             [['id_diocesis'], 'integer'],
             [['nombre_parroquia'], 'string', 'max' => 50],
             [['nombre_parroquia'], 'unique']

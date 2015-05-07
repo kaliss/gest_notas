@@ -18,7 +18,7 @@ class PrerrequisitosSearch extends Prerrequisitos
     public function rules()
     {
         return [
-            [['id_asig', 'prerrequisito'], 'integer'],
+            [['id_prerrequisito', 'prerrequisito', 'id_asig'], 'integer'],
             [['tipo_prerrequisito'], 'boolean'],
         ];
     }
@@ -41,12 +41,12 @@ class PrerrequisitosSearch extends Prerrequisitos
      */
     public function search($params)
     {
-        $query = Prerrequisitos::find();
+        $query = Prerrequisitos::find()->where(['prerrequisito'=>$params]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
+        /*
         $this->load($params);
 
         if (!$this->validate()) {
@@ -56,11 +56,12 @@ class PrerrequisitosSearch extends Prerrequisitos
         }
 
         $query->andFilterWhere([
-            'id_asig' => $this->id_asig,
+            'id_prerrequisito' => $this->id_prerrequisito,
             'prerrequisito' => $this->prerrequisito,
+            'id_asig' => $this->id_asig,
             'tipo_prerrequisito' => $this->tipo_prerrequisito,
         ]);
-
+        */
         return $dataProvider;
     }
 }

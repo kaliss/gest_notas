@@ -28,7 +28,7 @@ class TiposDeUsuario extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre_tipo_usuario'], 'required'],
+            [['nombre_tipo_usuario'], 'required', 'message'=>'Campo Obligatorio'],
             [['nombre_tipo_usuario'], 'string', 'max' => 25],
             [['nombre_tipo_usuario'], 'unique']
         ];

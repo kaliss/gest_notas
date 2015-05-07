@@ -28,7 +28,7 @@ class TiposDeGrupo extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre_tipo_grupo'], 'required'],
+            [['nombre_tipo_grupo'], 'required', 'message'=>'Campo Obligatorio'],
             [['nombre_tipo_grupo'], 'string', 'max' => 50],
             [['nombre_tipo_grupo'], 'unique']
         ];

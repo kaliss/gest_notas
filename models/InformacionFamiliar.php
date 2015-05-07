@@ -30,7 +30,7 @@ class InformacionFamiliar extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_est', 'cant_hermanos_est'], 'required'],
+            [['id_est', 'cant_hermanos_est'], 'required', 'message'=>'Campo Obligatorio'],
             [['id_est', 'cant_hermanas_est', 'cant_hermanos_est'], 'integer'],
             [['id_est'], 'unique']
         ];

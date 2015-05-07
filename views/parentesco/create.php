@@ -4,13 +4,13 @@ use yii\helpers\Html;
 
 
 /* @var $this yii\web\View */
-/* @var $model app\models\Parentezco */
+/* @var $model app\models\Parentesco */
 
-$this->title = 'Creación de Parentezcos';
-$this->params['breadcrumbs'][] = ['label' => 'Parentezcos', 'url' => ['index']];
+$this->title = 'Creación de Parentesco';
+$this->params['breadcrumbs'][] = ['label' => 'Parentescos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="parentezco-create">
+<div class="parentesco-create">
 
     <h1 class="title-form" align="center"><?= Html::encode($this->title) ?></h1>
 

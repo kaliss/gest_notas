@@ -28,7 +28,7 @@ class Diocesis extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre_diocesis'], 'required'],
+            [['nombre_diocesis'], 'required', 'message'=>'Campo Obligatorio'],
             [['nombre_diocesis'], 'string', 'max' => 50],
             [['nombre_diocesis'], 'unique']
         ];

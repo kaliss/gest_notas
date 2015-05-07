@@ -19,25 +19,47 @@ use app\models\Facultades;
 		      <div class="col-lg-8 col-lg-offset-2">
 		        <div class="formularios">
               <div class="row">
-                <div class="col-lg-6">
-                  <?= $form->field($modelAsig, 'cod_asig')->textInput(['maxlength' => 8]) ?>
-                  <?= $form->field($modelAsig, 'nombre_asig')->textInput(['maxlength' => 80]) ?>
-                  <?= $form->field($modelAsig, 'total_horas_asig')->textInput() ?>
-                  <?= $form->field($modelAsig, 'creditos_asig')->textInput() ?>
+                <div class="col-lg-12">
+                  <div class="col-lg-6">
+                    <?= $form->field($modelAsig, 'cod_asig')->textInput(['maxlength' => 8]) ?>
+                  </div>
+                  <div class="col-lg-6">
+                    <?= $form->field($modelAsig, 'nombre_asig')->textInput(['maxlength' => 80]) ?>
+                  </div>
                 </div>
-                <div class="col-lg-6">
-                  <?= $form->field($modelAsig, 'especificacion_asig')->textInput(['maxlength' => 50]) ?>
-                  <?= $form->field($modelPlan, 'id_facultad')->dropDownList(
+                <div class="col-lg-12">
+                  <div class="col-lg-3">
+                    <?= $form->field($modelAsig, 'total_horas_asig')->textInput() ?>
+                  </div>
+                  <div class="col-lg-3">
+                    <?= $form->field($modelAsig, 'creditos_asig')->textInput() ?>
+                  </div>
+                  <div class="col-lg-6">
+                    <br>
+                    <?= $form->field($modelAsig, 'especificacion_asig')->textInput(['maxlength' => 50]) ?>
+                  </div>  
+                </div>
+
+                <div class="col-lg-12">
+                  <hr>
+                  <h3>Plan de Estudio</h3>
+                  <div class="col-lg-6">
+                    <?= $form->field($modelPlan, 'id_facultad')->dropDownList(
                       ArrayHelper::map(Facultades::find()->all(),
                       'id_facultad',
                       'nombre_facultad'))?>
-                  <?= $form->field($modelPlan, 'curso')->textInput() ?>
-                  <?= $form->field($modelPlan, 'semestre')->textInput() ?>
+                  </div>
+                  <div class="col-lg-3">
+                    <?= $form->field($modelPlan, 'curso')->textInput() ?>
+                  </div>
+                  <div class="col-lg-3">
+                    <?= $form->field($modelPlan, 'semestre')->textInput() ?>
+                  </div>
                 </div>
               </div>
             
               <div class="form-group" align="right">
-                <?= Html::submitButton($modelAsig->isNewRecord ? 'Crear' : 'Actualizar', ['class' => $modelAsig->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                <?= Html::submitButton('Siguiente', ['class' => $modelAsig->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
               </div>
 		        </div>
           </div>

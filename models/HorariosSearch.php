@@ -41,12 +41,12 @@ class HorariosSearch extends Horarios
      */
     public function search($params)
     {
-        $query = Horarios::find();
+        $query = Horarios::find()->where(['id_grupo'=>$params]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
+        /*
         $this->load($params);
 
         if (!$this->validate()) {
@@ -54,16 +54,16 @@ class HorariosSearch extends Horarios
             // $query->where('0=1');
             return $dataProvider;
         }
-
+        /*
         $query->andFilterWhere([
             'id_horario' => $this->id_horario,
             'id_grupo' => $this->id_grupo,
             'hora_inicio' => $this->hora_inicio,
             'hora_fin' => $this->hora_fin,
         ]);
-
+        
         $query->andFilterWhere(['like', 'aula', $this->aula]);
-
+        */
         return $dataProvider;
     }
 }

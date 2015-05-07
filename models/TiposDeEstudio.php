@@ -28,7 +28,7 @@ class TiposDeEstudio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre_tipo_estudio'], 'required'],
+            [['nombre_tipo_estudio'], 'required', 'message'=>'Campo Obligatorio'],
             [['nombre_tipo_estudio'], 'string', 'max' => 50]
         ];
     }

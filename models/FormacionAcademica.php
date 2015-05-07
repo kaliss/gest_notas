@@ -31,7 +31,7 @@ class FormacionAcademica extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_est', 'lugar_estudio', 'id_tipo_estudio'], 'required'],
+            [['id_est', 'lugar_estudio', 'id_tipo_estudio'], 'required', 'message'=>'Campo Obligatorio'],
             [['id_est', 'id_tipo_estudio'], 'integer'],
             [['lugar_estudio'], 'string', 'max' => 50]
         ];
@@ -45,8 +45,8 @@ class FormacionAcademica extends \yii\db\ActiveRecord
         return [
             'id_estudio' => 'Id Estudio',
             'id_est' => 'Id Est',
-            'lugar_estudio' => 'Lugar Estudio',
-            'id_tipo_estudio' => 'Id Tipo Estudio',
+            'lugar_estudio' => 'Lugar de Estudio',
+            'id_tipo_estudio' => 'Tipo de Estudio',
         ];
     }
 

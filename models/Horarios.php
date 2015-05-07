@@ -31,7 +31,7 @@ class Horarios extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_grupo', 'hora_inicio', 'hora_fin', 'aula'], 'required'],
+            [['id_grupo', 'hora_inicio', 'hora_fin', 'aula'], 'required', 'message'=>'Campo Obligatorio'],
             [['id_grupo'], 'integer'],
             [['hora_inicio', 'hora_fin'], 'safe'],
             [['aula'], 'string', 'max' => 50]

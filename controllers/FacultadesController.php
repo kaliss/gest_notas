@@ -8,6 +8,8 @@ use app\models\FacultadesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\Query;
+
 
 /**
  * FacultadesController implements the CRUD actions for Facultades model.
@@ -69,7 +71,8 @@ class FacultadesController extends Controller
                 'model' => $model,
             ]);
         }
-    }
+        
+   }
 
     /**
      * Updates an existing Facultades model.
@@ -118,4 +121,6 @@ class FacultadesController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+
 }

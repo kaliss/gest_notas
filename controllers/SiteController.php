@@ -8,6 +8,7 @@ use yii\web\Controller;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use linslin\yii2\curl;
 
 class SiteController extends Controller
 {
@@ -53,30 +54,30 @@ class SiteController extends Controller
         return $this->render('index');
     }
 
-    public function actionLogin()
-    {
-        $this->layout = 'main2';
-        if (!\Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
+    // public function actionLogin()
+    // {
+    //     $this->layout = 'main2';
+    //     if (!\Yii::$app->user->isGuest) {
+    //         return $this->goHome();
+    //     }
 
-        $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
-            return $this->goBack();
-        } else {
-            return $this->render('login', [
-                'model' => $model,
-            ]);
-        }
-    }
+    //     $model = new LoginForm();
+    //     if ($model->load(Yii::$app->request->post()) && $model->login()) {
+    //         return $this->goBack();
+    //     } else {
+    //         return $this->render('login', [
+    //             'model' => $model,
+    //         ]);
+    //     }
+    // }
 
-    public function actionLogout()
-    {
-        $this->layout = 'main2';
-        Yii::$app->user->logout();
+    // public function actionLogout()
+    // {
+    //     $this->layout = 'main2';
+    //     Yii::$app->user->logout();
 
-        return $this->goHome();
-    }
+    //     return $this->goHome();
+    // }
 
     public function actionContact()
     {
@@ -97,5 +98,11 @@ class SiteController extends Controller
     {
         $this->layout = 'main2';
         return $this->render('about');
+    }
+
+    public function actionGetpage()
+    {
+    	$curl = new curl\Curl();
+    	$response= $curl->get('http://google.com/');
     }
 }

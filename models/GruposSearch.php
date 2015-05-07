@@ -18,8 +18,8 @@ class GruposSearch extends Grupos
     public function rules()
     {
         return [
-            [['id_grupo', 'id_tipo_grupo', 'id_doc', 'id_asig'], 'integer'],
-            [['cod_grupo'], 'safe'],
+            [['id_grupo', 'id_doc', 'id_asig'], 'integer'],
+            [['id_tipo_grupo','cod_grupo'], 'safe'],
             [['activo'], 'boolean'],
         ];
     }
@@ -56,15 +56,18 @@ class GruposSearch extends Grupos
             return $dataProvider;
         }
 
+        $query->joinWith('idTipoGrupo');
+
         $query->andFilterWhere([
             'id_grupo' => $this->id_grupo,
-            'id_tipo_grupo' => $this->id_tipo_grupo,
+            //'id_tipo_grupo' => $this->id_tipo_grupo,
             'id_doc' => $this->id_doc,
             'id_asig' => $this->id_asig,
             'activo' => $this->activo,
         ]);
 
-        $query->andFilterWhere(['like', 'cod_grupo', $this->cod_grupo]);
+        $query->andFilterWhere(['like', 'cod_grupo', $this->cod_grupo])
+            ->andFilterWhere(['like', 'tipos_de_grupo.nombre_tipo_grupo', $this->id_tipo_grupo]);
 
         return $dataProvider;
     }

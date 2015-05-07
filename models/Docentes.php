@@ -33,7 +33,7 @@ class Docentes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['num_carnet_doc', 'nombres_doc', 'apellidos_doc', 'cedula_doc'], 'required'],
+            [['num_carnet_doc', 'nombres_doc', 'apellidos_doc', 'cedula_doc'], 'required', 'message'=>'Campo Obligatorio'],
             [['num_carnet_doc', 'nombres_doc', 'apellidos_doc', 'cedula_doc', 'telefono_doc', 'email_doc'], 'string', 'max' => 50],
             [['cedula_doc'], 'unique']
         ];

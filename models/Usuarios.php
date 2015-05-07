@@ -31,7 +31,7 @@ class Usuarios extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_tipo_usuario', 'nombre_usuario', 'email_usuario', 'contrasena_usuario'], 'required'],
+            [['id_tipo_usuario', 'nombre_usuario', 'email_usuario', 'contrasena_usuario'], 'required', 'message'=>'Campo Obligatorio'],
             [['id_tipo_usuario'], 'integer'],
             [['nombre_usuario', 'contrasena_usuario'], 'string', 'max' => 25],
             [['email_usuario'], 'string', 'max' => 50],

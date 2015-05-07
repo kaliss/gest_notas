@@ -39,7 +39,7 @@ class Estudiantes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['num_carnet_est', 'nombres_est', 'apellidos_est', 'fecha_nac_est', 'lugar_nac_est', 'telefono_est', 'direccion_dom_est'], 'required'],
+            [['num_carnet_est', 'nombres_est', 'apellidos_est', 'fecha_nac_est', 'lugar_nac_est', 'telefono_est', 'direccion_dom_est'], 'required', 'message'=>'Campo Obligatorio'],
             [['fecha_nac_est'], 'safe'],
             [['num_carnet_est', 'nombres_est', 'apellidos_est', 'lugar_nac_est', 'telefono_est', 'cedula_est'], 'string', 'max' => 50],
             [['direccion_dom_est'], 'string', 'max' => 100],
@@ -54,7 +54,7 @@ class Estudiantes extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            //'id_est' => 'Id Est',
+            'id_est' => 'Estudiantes',
             'num_carnet_est' => 'Número de Carnet',
             'nombres_est' => 'Nombres del Estudiante',
             'apellidos_est' => 'Apellidos del Estudiante',

@@ -10,6 +10,11 @@ use app\models\InformacionFamiliarSearch;
 use app\models\InformacionSeminarista;
 use app\models\InformacionSeminaristaSearch;
 
+use app\models\Parientes;
+use app\models\ParientesSearch;
+use app\models\FormacionAcademica;
+use app\models\FormacionAcademicaSearch;
+
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -45,7 +50,29 @@ class EstudiantesController extends Controller
             'dataProviderEst' => $dataProviderEst,
         ]);
     }
+    public function actionIndexparientes($id,$nombre)
+    {
+        $searchModelPar = new ParientesSearch();
+        $dataProviderPar = $searchModelPar->search($id);
 
+        return $this->render('indexparientes', [
+            'dataProviderPar' => $dataProviderPar,
+            'IDEST' => $id,
+            'NOMBRE' => $nombre,
+        ]);
+
+    }
+    public function actionIndexacad($id,$nombre)
+    {
+        $searchModelAcad = new FormacionAcademicaSearch();
+        $dataProviderAcad = $searchModelAcad->search($id);
+
+        return $this->render('indexacad', [
+            'dataProviderAcad' => $dataProviderAcad,
+            'IDEST' => $id,
+            'NOMBRE' => $nombre,
+        ]);
+    }
     /**
      * Displays a single Estudiantes model.
      * @param integer $id
@@ -53,10 +80,17 @@ class EstudiantesController extends Controller
      */
     public function actionView($id)
     {
+        $searchModelPar = new ParientesSearch();
+        $dataProviderPar = $searchModelPar->search($id);
+        $searchModelAcad = new FormacionAcademicaSearch();
+        $dataProviderAcad = $searchModelAcad->search($id);
+
         return $this->render('view', [
             'modelEst' => $this->findModelEst($id),
             'modelFam' => $this->findModelFam($id),
             'modelSem' => $this->findModelSem($id),
+            'dataProviderPar' => $dataProviderPar,
+            'dataProviderAcad' => $dataProviderAcad,
         ]);
     }
 
@@ -70,13 +104,13 @@ class EstudiantesController extends Controller
         $modelEst = new Estudiantes();
         $modelFam = new InformacionFamiliar();
         $modelSem = new InformacionSeminarista();
-
+		
         if ($modelEst->load(Yii::$app->request->post()) && $modelEst->save()) {
             $modelFam->id_est = $modelEst->id_est;
             if ($modelFam->load(Yii::$app->request->post()) && $modelFam->save()) {
                 $modelSem->id_est = $modelEst->id_est;
                 if ($modelSem->load(Yii::$app->request->post()) && $modelSem->save()) {
-                    return $this->redirect(['view', 'id' => $modelEst->id_est]);
+                    return $this->redirect(['indexparientes', 'id' => $modelEst->id_est, 'nombre' =>$modelEst->estudiantes]);
                 } else{
                     $this->deleteFam($modelFam->id_est);
                     $this->deleteEst($modelEst->id_est);
@@ -102,6 +136,32 @@ class EstudiantesController extends Controller
             ]);
         }
     }
+    public function actionCreatepariente($id,$nombre)
+    {
+        $modelPar = new Parientes();
+        $modelPar->id_est = $id;
+        if ($modelPar->load(Yii::$app->request->post()) && $modelPar->save()) {
+            return $this->redirect(['indexparientes', 'id' => $id, 'nombre' => $nombre]);
+        } else {
+            return $this->render('createparientes', [
+                'modelPar' => $modelPar,
+                'NOMBRE' => $nombre,
+            ]);
+        }
+    }
+    public function actionCreateacad($id,$nombre)
+    {
+        $modelAcad = new FormacionAcademica();
+        $modelAcad->id_est = $id;
+        if ($modelAcad->load(Yii::$app->request->post()) && $modelAcad->save()) {
+            return $this->redirect(['indexacad', 'id' => $id, 'nombre' => $nombre]);
+        } else {
+            return $this->render('createacad', [
+                'modelAcad' => $modelAcad,
+                'NOMBRE' => $nombre,
+            ]);
+        }
+    }
 
     /**
      * Updates an existing Estudiantes model.
@@ -117,7 +177,7 @@ class EstudiantesController extends Controller
 
         if ($modelEst->load(Yii::$app->request->post()) && $modelFam->load(Yii::$app->request->post()) && $modelSem->load(Yii::$app->request->post()) &&
             $modelEst->save() && $modelFam->save() && $modelSem->save() ) {
-            return $this->redirect(['view', 'id' => $modelEst->id_est]);
+            return $this->redirect(['indexparientes', 'id' => $modelEst->id_est, 'nombre' =>$modelEst->estudiantes]);
         } else {
             return $this->render('update', [
                 'modelEst' => $modelEst,
@@ -135,6 +195,9 @@ class EstudiantesController extends Controller
      */
     public function actionDelete($id)
     {
+        $this->deleteparientes($id);
+        $this->deleteacad($id);
+
         $this->findModelFam($id)->delete();
         $this->findModelSem($id)->delete();
         $this->findModelEst($id)->delete();
@@ -148,6 +211,22 @@ class EstudiantesController extends Controller
     protected function deleteFam($id)
     {
         $this->findModelFam($id)->delete();
+    }
+    public function actionDeletedetalle($id)
+    {
+        $modelPar = Parientes::findOne($id);
+        $idEst = $modelPar->id_est;
+        $nombre = $this->findModelEst($idEst)->estudiantes;
+        $modelPar->delete();
+        return $this->redirect(['indexparientes', 'id'=>$idEst, 'nombre'=>$nombre]);
+    }
+    public function actionDeletedetalle2($id)
+    {
+        $modelAcad = FormacionAcademica::findOne($id);
+        $idEst = $modelAcad->id_est;
+        $nombre = $this->findModelEst($idEst)->estudiantes;
+        $modelAcad->delete();
+        return $this->redirect(['indexacad', 'id'=>$idEst, 'nombre'=>$nombre]);
     }
 
     /**
@@ -167,7 +246,7 @@ class EstudiantesController extends Controller
     }
     protected function findModelFam($id)
     {
-        if (($modelFam = InformacionFamiliar::findOne($id)) !== null) {
+        if (($modelFam = InformacionFamiliar::findOne(['id_est'=>$id])) !== null) {
             return $modelFam;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
@@ -175,10 +254,22 @@ class EstudiantesController extends Controller
     }
     protected function findModelSem($id)
     {
-        if (($modelSem = InformacionSeminarista::findOne($id)) !== null) {
+        if (($modelSem = InformacionSeminarista::findOne(['id_est'=>$id])) !== null) {
             return $modelSem;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    protected function deleteparientes($id)
+    {
+        if ((Parientes::find()->where(['id_est'=>$id])->count()) !== 0){
+            Parientes::deleteAll(['id_est'=>$id]);
+        }
+    }
+    protected function deleteacad($id)
+    {
+        if ((FormacionAcademica::find()->where(['id_est'=>$id])->count()) !== 0){
+            FormacionAcademica::deleteAll(['id_est'=>$id]);
         }
     }
 }

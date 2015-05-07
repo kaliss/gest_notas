@@ -49,11 +49,11 @@ CREATE TABLE `docentes`
 	email_doc VARCHAR(50) NULL,
 	CONSTRAINT Semi_Doce_PK PRIMARY KEY (id_doc)
 );
-CREATE TABLE `parentezco`
+CREATE TABLE `parentesco`
 (
-	id_parentezco INTEGER NOT NULL AUTO_INCREMENT,
-	nombre_parentezco VARCHAR(50) NOT NULL,
-	CONSTRAINT Semi_Paren_PK PRIMARY KEY (id_parentezco)
+	id_parentesco INTEGER NOT NULL AUTO_INCREMENT,
+	nombre_parentesco VARCHAR(50) NOT NULL,
+	CONSTRAINT Semi_Paren_PK PRIMARY KEY (id_parentesco)
 );
 CREATE TABLE `facultades`
 (
@@ -128,11 +128,11 @@ CREATE TABLE `parientes`
 	id_pariente INTEGER NOT NULL AUTO_INCREMENT,
 	id_est INTEGER NOT NULL,
 	nombre_pariente VARCHAR(50) NOT NULL,
-	id_parentezco INTEGER NOT NULL,
+	id_parentesco INTEGER NOT NULL,
 	id_profesion INTEGER NOT NULL,
 	CONSTRAINT Semi_Parien_PK PRIMARY KEY (id_pariente),
     CONSTRAINT Semi_Parien_FK_IdEst FOREIGN KEY (id_est) REFERENCES estudiantes(id_est),
-    CONSTRAINT Semi_Parien_FK_IdParen FOREIGN KEY (id_parentezco) REFERENCES parentezco(id_parentezco),
+    CONSTRAINT Semi_Parien_FK_IdParen FOREIGN KEY (id_parentesco) REFERENCES parentesco(id_parentesco),
     CONSTRAINT Semi_Parien_FK_IdProf FOREIGN KEY (id_profesion) REFERENCES	profesiones(id_profesion)
 );
 CREATE TABLE `plan_de_estudio`
@@ -149,12 +149,13 @@ CREATE TABLE `plan_de_estudio`
 );
 CREATE TABLE `prerrequisitos`
 (
-	id_asig INTEGER NOT NULL,
+	id_prerrequisito INTEGER NOT NULL AUTO_INCREMENT,
 	prerrequisito INTEGER NOT NULL,
+	id_asig INTEGER NOT NULL,
 	tipo_prerrequisito BIT NULL,
-	CONSTRAINT Semi_Prerr_PK PRIMARY KEY (id_asig, prerrequisito),
-    CONSTRAINT Semi_Prerr_FK_IdAsig FOREIGN KEY (id_asig) REFERENCES asignaturas(id_asig),
-    CONSTRAINT Semi_Prerr_FK_Prerr FOREIGN KEY (prerrequisito) REFERENCES asignaturas(id_asig)
+	CONSTRAINT Semi_Prerr_PK PRIMARY KEY (id_prerrequisito),
+	CONSTRAINT Semi_Prerr_FK_Prerr FOREIGN KEY (prerrequisito) REFERENCES asignaturas(id_asig),
+    CONSTRAINT Semi_Prerr_FK_IdAsig FOREIGN KEY (id_asig) REFERENCES asignaturas(id_asig)
 );
 CREATE TABLE `grupos`
 (
@@ -188,7 +189,6 @@ CREATE TABLE `matriculas`
 	id_facultad INTEGER NOT NULL,
 	curso INTEGER NOT NULL,
 	semestre INTEGER NOT NULL,
-	fecha_matricula DATETIME NOT NULL,
 	CONSTRAINT Semi_Matri_PK PRIMARY KEY (id_matricula),
     CONSTRAINT Semi_Matri_FK_IdFac FOREIGN KEY (id_facultad) REFERENCES facultades(id_facultad)
 );

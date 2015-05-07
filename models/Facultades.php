@@ -29,7 +29,7 @@ class Facultades extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['nombre_facultad'], 'required'],
+            [['nombre_facultad'], 'required', 'message'=>'Campo Obligatorio'],
             [['nombre_facultad'], 'string', 'max' => 50],
             [['nombre_facultad'], 'unique']
         ];

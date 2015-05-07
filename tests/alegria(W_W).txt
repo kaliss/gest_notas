@@ -1,0 +1,2 @@
+rafa_uchiha20@hotmail.es
+git clone http://gitlab.com/logicoim/gestnotas.git

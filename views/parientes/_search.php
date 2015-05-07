@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nombre_pariente') ?>
 
-    <?= $form->field($model, 'id_parentezco') ?>
+    <?= $form->field($model, 'id_parentesco') ?>
 
     <?= $form->field($model, 'id_profesion') ?>
 

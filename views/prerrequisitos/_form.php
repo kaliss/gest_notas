@@ -12,9 +12,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'id_asig')->textInput() ?>
-
     <?= $form->field($model, 'prerrequisito')->textInput() ?>
+
+    <?= $form->field($model, 'id_asig')->textInput() ?>
 
     <?= $form->field($model, 'tipo_prerrequisito')->checkbox() ?>
 

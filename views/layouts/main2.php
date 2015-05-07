@@ -72,9 +72,9 @@ AppAsset::register($this);
                   ['label' => 'Acerca de', 'url' => ['/site/about']],
                   //['label' => 'Contact', 'url' => ['/site/contact']],
                   Yii::$app->user->isGuest ?
-                      ['label' => 'Login', 'url' => ['/site/login']] :
+                      ['label' => 'Login', 'url' => ['/user/security/login']] :
                       ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                          'url' => ['/site/logout'],
+                          'url' => ['/user/security/logout'],
                             'linkOptions' => ['data-method' => 'post']],
               ],
           ]);
@@ -93,9 +93,9 @@ AppAsset::register($this);
     </div>
 
     <footer class="footer">
-        <div class="container">
-            <p class="pull-left">&copy; Calificaciones <?= date('Y') ?></p>
-            <p class="pull-right"><?= Yii::powered() ?></p>
+        <div class="container-fluid">
+            <p class="pull-left">&copy; Seminario Interdiocesano Nacional "Nuestra Señora de Fátima" <?= date('Y') ?></p>
+            <p class="pull-right">Universidad Centroamericana (UCA)</p>
         </div>
     </footer>
 

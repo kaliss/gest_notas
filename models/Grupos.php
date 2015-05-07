@@ -36,7 +36,7 @@ class Grupos extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cod_grupo', 'id_tipo_grupo', 'id_doc', 'id_asig'], 'required'],
+            [['cod_grupo', 'id_tipo_grupo', 'id_doc', 'id_asig'], 'required', 'message'=>'Campo Obligatorio'],
             [['id_tipo_grupo', 'id_doc', 'id_asig'], 'integer'],
             [['activo'], 'boolean'],
             [['cod_grupo'], 'string', 'max' => 50],

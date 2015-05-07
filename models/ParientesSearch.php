@@ -18,7 +18,7 @@ class ParientesSearch extends Parientes
     public function rules()
     {
         return [
-            [['id_pariente', 'id_est', 'id_parentezco', 'id_profesion'], 'integer'],
+            [['id_pariente', 'id_est', 'id_parentesco', 'id_profesion'], 'integer'],
             [['nombre_pariente'], 'safe'],
         ];
     }
@@ -41,12 +41,12 @@ class ParientesSearch extends Parientes
      */
     public function search($params)
     {
-        $query = Parientes::find();
+        $query = Parientes::find()->where(['id_est'=>$params]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
+        /*
         $this->load($params);
 
         if (!$this->validate()) {
@@ -58,12 +58,12 @@ class ParientesSearch extends Parientes
         $query->andFilterWhere([
             'id_pariente' => $this->id_pariente,
             'id_est' => $this->id_est,
-            'id_parentezco' => $this->id_parentezco,
+            'id_parentesco' => $this->id_parentesco,
             'id_profesion' => $this->id_profesion,
         ]);
 
         $query->andFilterWhere(['like', 'nombre_pariente', $this->nombre_pariente]);
-
+        */
         return $dataProvider;
     }
 }

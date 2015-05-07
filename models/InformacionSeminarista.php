@@ -32,7 +32,7 @@ class InformacionSeminarista extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_est', 'id_parroquia', 'fecha_ingreso_est'], 'required'],
+            [['id_est', 'id_parroquia', 'fecha_ingreso_est'], 'required', 'message'=>'Campo Obligatorio'],
             [['id_est', 'id_parroquia'], 'integer'],
             [['fecha_ingreso_est'], 'safe'],
             [['observaciones'], 'string', 'max' => 100],

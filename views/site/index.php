@@ -22,7 +22,7 @@ $this->title = 'My Yii Application';
               <hr>
               <ul id="navigationMenu">
                   <li><?= Html::a('<span>Calificaciones</span>',['calificaciones/index'],['class'=>'home','id'=>'calific']) ?></li>
-                  <li><?= Html::a('<span>Matrículas</span>',['matriculas/index'],['class'=>'home','id'=>'matriculas']) ?></li>
+                  <li><?= Html::a('<span>Matricular</span>',['matricular/index'],['class'=>'home','id'=>'matriculas']) ?></li>
               </ul>
             </div>
           </div>
@@ -61,6 +61,12 @@ $this->title = 'My Yii Application';
               <hr>
               <div class="col-lg-3">
                 <ul id="navigationMenu">
+                  <li><?= Html::a('<span>Facultades</span>',['facultades/index'],['class'=>'home','id'=>'facultades']) ?></li>
+                  <li><?= Html::a('<span>Periodo Escolar</span>',['matriculas/index'],['class'=>'home','id'=>'periodo']) ?></li>
+                </ul>
+              </div>
+              <div class="col-lg-3">
+                <ul id="navigationMenu">
                   <li><?= Html::a('<span>Diócesis</span>',['diocesis/index'], ['class'=>'home','id'=>'diocesis']) ?></li>
                   <li><?= Html::a('<span>Parroquias</span>',['parroquias/index'], ['class'=>'home','id'=>'parroquias']) ?></li>
                 </ul>
@@ -68,18 +74,13 @@ $this->title = 'My Yii Application';
               <div class="col-lg-3">
                 <ul id="navigationMenu">
                   <li><?= Html::a('<span>Profesiones</span>',['profesiones/index'], ['class'=>'home','id'=>'profesiones']) ?></li>
-                  <li><?= Html::a('<span>Parentezco</span>',['parentezco/index'],['class'=>'home','id'=>'parentezco']) ?></li>
+                  <li><?= Html::a('<span>Parentesco</span>',['parentesco/index'],['class'=>'home','id'=>'parentesco']) ?></li>
                 </ul>
               </div>
               <div class="col-lg-3">
                 <ul id="navigationMenu">
                   <li><?= Html::a('<span>Tipos de Estudio</span>',['tipos-de-estudio/index'], ['class'=>'home','id'=>'tipestudio']) ?></li>
                   <li><?= Html::a('<span>Tipos de Grupo</span>',['tipos-de-grupo/index'], ['class'=>'home','id'=>'tipgrupo']) ?></li>
-                </ul>
-              </div>
-              <div class="col-lg-3">
-                <ul id="navigationMenu">
-                  <li><?= Html::a('<span>Facultades</span>',['facultades/index'],['class'=>'home','id'=>'facultades']) ?></li>
                 </ul>
               </div>
             </div>

@@ -43,14 +43,13 @@ class PrerrequisitosController extends Controller
 
     /**
      * Displays a single Prerrequisitos model.
-     * @param integer $id_asig
-     * @param integer $prerrequisito
+     * @param integer $id
      * @return mixed
      */
-    public function actionView($id_asig, $prerrequisito)
+    public function actionView($id)
     {
         return $this->render('view', [
-            'model' => $this->findModel($id_asig, $prerrequisito),
+            'model' => $this->findModel($id),
         ]);
     }
 
@@ -64,7 +63,7 @@ class PrerrequisitosController extends Controller
         $model = new Prerrequisitos();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id_asig' => $model->id_asig, 'prerrequisito' => $model->prerrequisito]);
+            return $this->redirect(['view', 'id' => $model->id_prerrequisito]);
         } else {
             return $this->render('create', [
                 'model' => $model,
@@ -75,16 +74,15 @@ class PrerrequisitosController extends Controller
     /**
      * Updates an existing Prerrequisitos model.
      * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id_asig
-     * @param integer $prerrequisito
+     * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id_asig, $prerrequisito)
+    public function actionUpdate($id)
     {
-        $model = $this->findModel($id_asig, $prerrequisito);
+        $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id_asig' => $model->id_asig, 'prerrequisito' => $model->prerrequisito]);
+            return $this->redirect(['view', 'id' => $model->id_prerrequisito]);
         } else {
             return $this->render('update', [
                 'model' => $model,
@@ -95,13 +93,12 @@ class PrerrequisitosController extends Controller
     /**
      * Deletes an existing Prerrequisitos model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id_asig
-     * @param integer $prerrequisito
+     * @param integer $id
      * @return mixed
      */
-    public function actionDelete($id_asig, $prerrequisito)
+    public function actionDelete($id)
     {
-        $this->findModel($id_asig, $prerrequisito)->delete();
+        $this->findModel($id)->delete();
 
         return $this->redirect(['index']);
     }
@@ -109,14 +106,13 @@ class PrerrequisitosController extends Controller
     /**
      * Finds the Prerrequisitos model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id_asig
-     * @param integer $prerrequisito
+     * @param integer $id
      * @return Prerrequisitos the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
-    protected function findModel($id_asig, $prerrequisito)
+    protected function findModel($id)
     {
-        if (($model = Prerrequisitos::findOne(['id_asig' => $id_asig, 'prerrequisito' => $prerrequisito])) !== null) {
+        if (($model = Prerrequisitos::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

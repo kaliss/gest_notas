@@ -7,6 +7,8 @@ use app\models\Asignaturas;
 use app\models\AsignaturasSearch;
 use app\models\PlanDeEstudio;
 use app\models\PlanDeEstudioSearch;
+use app\models\Prerrequisitos;
+use app\models\PrerrequisitosSearch;
 
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -43,6 +45,17 @@ class AsignaturasController extends Controller
             'dataProviderAsig' => $dataProviderAsig,
         ]);
     }
+    public function actionIndexpre($id,$nombre)
+    {
+        $searchModelPre = new PrerrequisitosSearch();
+        $dataProviderPre = $searchModelPre->search($id);
+
+        return $this->render('indexpre', [
+            'dataProviderPre' => $dataProviderPre,
+            'IDASIG' => $id,
+            'NOMBRE' => $nombre,
+            ]);
+    }
 
     /**
      * Displays a single Asignaturas model.
@@ -51,9 +64,13 @@ class AsignaturasController extends Controller
      */
     public function actionView($id)
     {
+        $searchModelPre = new PrerrequisitosSearch();
+        $dataProviderPre = $searchModelPre->search($id);
+
         return $this->render('view', [
             'modelAsig' => $this->findModelAsig($id),
             'modelPlan' => $this->findModelPlan($id),
+            'dataProviderPre' => $dataProviderPre,
         ]);
     }
 
@@ -70,7 +87,7 @@ class AsignaturasController extends Controller
         if ($modelAsig->load(Yii::$app->request->post()) && $modelAsig->save() ) {
             $modelPlan->id_asig = $modelAsig->id_asig;
             if ($modelPlan->load(Yii::$app->request->post()) && $modelPlan->save() ) {
-                return $this->redirect(['view', 'id' => $modelAsig->id_asig]);
+                return $this->redirect(['indexpre', 'id' => $modelAsig->id_asig, 'nombre'=>$modelAsig->nombre_asig]);
             }
             else{
                 $this->deleteAsig($modelAsig->id_asig);
@@ -83,6 +100,19 @@ class AsignaturasController extends Controller
             return $this->render('create', [
                 'modelAsig' => $modelAsig,
                 'modelPlan' => $modelPlan,
+            ]);
+        }
+    }
+    public function actionCreatepre($id,$nombre)
+    {
+        $modelPre = new Prerrequisitos();
+        $modelPre->prerrequisito = $id;
+        if ($modelPre->load(Yii::$app->request->post()) && $modelPre->save()) {
+            return $this->redirect(['indexpre', 'id' => $id, 'nombre' => $nombre]);
+        } else {
+            return $this->render('createpre', [
+                'modelPre' => $modelPre,
+                'NOMBRE' => $nombre,
             ]);
         }
     }
@@ -99,7 +129,7 @@ class AsignaturasController extends Controller
         $modelPlan = $this->findModelPlan($id);
 
         if ($modelAsig->load(Yii::$app->request->post()) && $modelPlan->load(Yii::$app->request->post()) && $modelAsig->save() && $modelPlan->save()) {
-            return $this->redirect(['view', 'id' => $modelAsig->id_asig]);
+            return $this->redirect(['indexpre', 'id' => $modelAsig->id_asig, 'nombre'=>$modelAsig->nombre_asig]);
         } else {
             return $this->render('update', [
                 'modelAsig' => $modelAsig,
@@ -116,6 +146,8 @@ class AsignaturasController extends Controller
      */
     public function actionDelete($id)
     {
+        $this->deletepre($id);
+
         $this->findModelPlan($id)->delete();
 
         $this->findModelAsig($id)->delete();
@@ -125,6 +157,14 @@ class AsignaturasController extends Controller
     protected function deleteAsig($id)
     {
         $this->findModelAsig($id)->delete();
+    }
+    public function actionDeletedetalle($id)
+    {
+        $modelPre = Prerrequisitos::findOne($id);
+        $idAsig =$modelPre->prerrequisito;
+        $nombre = $this->findModelAsig($idAsig)->nombre_asig;
+        $modelPre->delete();
+        return $this->redirect(['indexpre', 'id'=>$idAsig, 'nombre'=>$nombre]);
     }
     /**
      * Finds the Asignaturas model based on its primary key value.
@@ -143,10 +183,16 @@ class AsignaturasController extends Controller
     }
     protected function findModelPlan($id)
     {
-        if (($modelPlan = PlanDeEstudio::findOne($id)) !== null) {
+        if (($modelPlan = PlanDeEstudio::findOne(['id_asig'=>$id])) !== null) {
             return $modelPlan;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    protected function deletepre($id)
+    {
+        if ((Prerrequisitos::find()->where(['prerrequisito'=>$id])->count()) !== 0){
+            Prerrequisitos::deleteAll(['prerrequisito'=>$id]);
         }
     }
 }

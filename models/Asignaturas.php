@@ -34,7 +34,7 @@ class Asignaturas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cod_asig', 'nombre_asig', 'creditos_asig'], 'required'],
+            [['cod_asig', 'nombre_asig', 'creditos_asig'], 'required', 'message'=>'Campo Obligatorio'],
             [['total_horas_asig', 'creditos_asig'], 'integer'],
             [['cod_asig'], 'string', 'max' => 8],
             [['nombre_asig'], 'string', 'max' => 80],

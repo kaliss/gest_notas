@@ -10,11 +10,11 @@ use Yii;
  * @property integer $id_pariente
  * @property integer $id_est
  * @property string $nombre_pariente
- * @property integer $id_parentezco
+ * @property integer $id_parentesco
  * @property integer $id_profesion
  *
  * @property Estudiantes $idEst
- * @property Parentezco $idParentezco
+ * @property Parentesco $idParentesco
  * @property Profesiones $idProfesion
  */
 class Parientes extends \yii\db\ActiveRecord
@@ -33,8 +33,8 @@ class Parientes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_est', 'nombre_pariente', 'id_parentezco', 'id_profesion'], 'required'],
-            [['id_est', 'id_parentezco', 'id_profesion'], 'integer'],
+            [['id_est', 'nombre_pariente', 'id_parentesco', 'id_profesion'], 'required', 'message'=>'Campo Obligatorio'],
+            [['id_est', 'id_parentesco', 'id_profesion'], 'integer'],
             [['nombre_pariente'], 'string', 'max' => 50]
         ];
     }
@@ -47,9 +47,9 @@ class Parientes extends \yii\db\ActiveRecord
         return [
             'id_pariente' => 'Id Pariente',
             'id_est' => 'Id Est',
-            'nombre_pariente' => 'Nombre Pariente',
-            'id_parentezco' => 'Id Parentezco',
-            'id_profesion' => 'Id Profesion',
+            'nombre_pariente' => 'Nombre del Pariente',
+            'id_parentesco' => 'Parentesco',
+            'id_profesion' => 'Profesión',
         ];
     }
 
@@ -64,9 +64,9 @@ class Parientes extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getIdParentezco()
+    public function getIdParentesco()
     {
-        return $this->hasOne(Parentezco::className(), ['id_parentezco' => 'id_parentezco']);
+        return $this->hasOne(Parentesco::className(), ['id_parentesco' => 'id_parentesco']);
     }
 
     /**

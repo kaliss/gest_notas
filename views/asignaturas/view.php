@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Asignaturas */
@@ -41,6 +42,19 @@ $this->params['breadcrumbs'][] = $this->title;
                       'semestre',
                   ],
               ]) ?>
+              <?= GridView::widget([
+                  'dataProvider' => $dataProviderPre,
+                  //'filterModel' => $searchModel,
+                  'columns' => [
+                      //['class' => 'yii\grid\SerialColumn'],
+                      //'id_prerrequisito',
+                      ['attribute'=>'id_asig',
+                      'value'=>'idAsig.nombre_asig'],
+                      //'prerrequisito',
+                      'tipo_prerrequisito:boolean',
+                  ],
+              ]); ?>
+
               <p align="right">
                   <?= Html::a('Actualizar', ['update', 'id' => $modelAsig->id_asig], ['class' => 'btn btn-primary']) ?>
                   <?= Html::a('Eliminar', ['delete', 'id' => $modelAsig->id_asig], [

@@ -32,7 +32,7 @@ class PlanDeEstudio extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_asig', 'id_facultad', 'curso', 'semestre'], 'required'],
+            [['id_asig', 'id_facultad', 'curso', 'semestre'], 'required', 'message'=>'Campo Obligatorio'],
             [['id_asig', 'id_facultad', 'curso', 'semestre'], 'integer'],
             [['id_asig'], 'unique']
         ];

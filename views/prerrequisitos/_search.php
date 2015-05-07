@@ -15,9 +15,11 @@ use yii\widgets\ActiveForm;
         'method' => 'get',
     ]); ?>
 
-    <?= $form->field($model, 'id_asig') ?>
+    <?= $form->field($model, 'id_prerrequisito') ?>
 
     <?= $form->field($model, 'prerrequisito') ?>
+
+    <?= $form->field($model, 'id_asig') ?>
 
     <?= $form->field($model, 'tipo_prerrequisito')->checkbox() ?>
 

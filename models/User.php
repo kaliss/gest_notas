@@ -31,7 +31,7 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      * @inheritdoc
      */
     public static function findIdentity($id)
-    {
+    {	    
         return isset(self::$users[$id]) ? new static(self::$users[$id]) : null;
     }
 
@@ -40,6 +40,10 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public static function findIdentityByAccessToken($token, $type = null)
     {
+	$user = Users::find()
+		       ->where("activate=:activate",[":activate" => 1])
+			   ->andWhere("accessToken=:accessToken",[":accessToken" => $token])
+			   ->all();
         foreach (self::$users as $user) {
             if ($user['accessToken'] === $token) {
                 return new static($user);
@@ -57,8 +61,13 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public static function findByUsername($username)
     {
-        foreach (self::$users as $user) {
-            if (strcasecmp($user['username'], $username) === 0) {
+	$user = Users::find()
+		       ->where("activate=:activate",[":activate" => 1])
+			   ->andWhere("username=:username",[":username" => $username])
+			   ->all();
+			   
+        foreach ($users as $user) {
+            if (strcasecmp($user->username, $username) === 0) {
                 return new static($user);
             }
         }
@@ -98,6 +107,10 @@ class User extends \yii\base\Object implements \yii\web\IdentityInterface
      */
     public function validatePassword($password)
     {
+	/*valida el password*/
+	if (crypt($password, this->password) == $this->$this->password)
+	{
         return $this->password === $password;
     }
+}
 }

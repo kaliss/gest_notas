@@ -5,9 +5,9 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\Prerrequisitos */
 
-$this->title = 'Update Prerrequisitos: ' . ' ' . $model->id_asig;
+$this->title = 'Update Prerrequisitos: ' . ' ' . $model->id_prerrequisito;
 $this->params['breadcrumbs'][] = ['label' => 'Prerrequisitos', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id_asig, 'url' => ['view', 'id_asig' => $model->id_asig, 'prerrequisito' => $model->prerrequisito]];
+$this->params['breadcrumbs'][] = ['label' => $model->id_prerrequisito, 'url' => ['view', 'id' => $model->id_prerrequisito]];
 $this->params['breadcrumbs'][] = 'Update';
 ?>
 <div class="prerrequisitos-update">

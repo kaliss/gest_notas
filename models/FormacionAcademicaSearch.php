@@ -41,12 +41,12 @@ class FormacionAcademicaSearch extends FormacionAcademica
      */
     public function search($params)
     {
-        $query = FormacionAcademica::find();
+        $query = FormacionAcademica::find()->where(['id_est'=>$params]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
+        /*
         $this->load($params);
 
         if (!$this->validate()) {
@@ -62,7 +62,7 @@ class FormacionAcademicaSearch extends FormacionAcademica
         ]);
 
         $query->andFilterWhere(['like', 'lugar_estudio', $this->lugar_estudio]);
-
+        */
         return $dataProvider;
     }
 }

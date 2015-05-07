@@ -2,11 +2,12 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Grupos */
 
-$this->title = 'Grupo: '.$model->cod_grupo;
+$this->title = 'Grupo: '.$modelGru->cod_grupo;
 $this->params['breadcrumbs'][] = ['label' => 'Grupos', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
@@ -19,22 +20,34 @@ $this->params['breadcrumbs'][] = $this->title;
           <div class="col-lg-6 col-lg-offset-3">
 	          	<div class="formularios">
 		            <?= DetailView::widget([
-		                'model' => $model,
+		                'model' => $modelGru,
 		                'attributes' => [
 		                    //'id_grupo',
 		                    'cod_grupo',
 		                    ['label'=>'Tipo de Grupo',
-		                    'value'=>$model->idTipoGrupo->nombre_tipo_grupo],
+		                    'value'=>$modelGru->idTipoGrupo->nombre_tipo_grupo],
 		                    ['label'=>'Docente',
-		                    'value'=>$model->idDoc->docentes],
+		                    'value'=>$modelGru->idDoc->docentes],
 		                    ['label'=>'Asignatura',
-		                    'value'=>$model->idAsig->nombre_asig],
+		                    'value'=>$modelGru->idAsig->nombre_asig],
 		                    'activo:boolean',
 		                ],
 		            ]) ?>
+		            <?= GridView::widget([
+		                'dataProvider' => $dataProviderHor,
+		                //'filterModel' => $searchModel,
+		                'columns' => [
+		                    //['class' => 'yii\grid\SerialColumn'],
+		                    //'id_horario',
+		                    //'id_grupo',
+		                    'hora_inicio',
+		                    'hora_fin',
+		                    'aula',
+		                ],
+		            ]); ?>
 		            <p align="right">
-		                <?= Html::a('Actualizar', ['update', 'id' => $model->id_grupo], ['class' => 'btn btn-primary']) ?>
-		                <?= Html::a('Eliminar', ['delete', 'id' => $model->id_grupo], [
+		                <?= Html::a('Actualizar', ['update', 'id' => $modelGru->id_grupo], ['class' => 'btn btn-primary']) ?>
+		                <?= Html::a('Eliminar', ['delete', 'id' => $modelGru->id_grupo], [
 		                    'class' => 'btn btn-danger',
 		                    'data' => [
 		                        'confirm' => '¿Está seguro de eliminar este Grupo?',

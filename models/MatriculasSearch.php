@@ -19,7 +19,7 @@ class MatriculasSearch extends Matriculas
     {
         return [
             [['id_matricula', 'id_facultad', 'curso', 'semestre'], 'integer'],
-            [['cod_matricula', 'fecha_matricula'], 'safe'],
+            [['cod_matricula'], 'safe'],
         ];
     }
 
@@ -60,7 +60,6 @@ class MatriculasSearch extends Matriculas
             'id_facultad' => $this->id_facultad,
             'curso' => $this->curso,
             'semestre' => $this->semestre,
-            'fecha_matricula' => $this->fecha_matricula,
         ]);
 
         $query->andFilterWhere(['like', 'cod_matricula', $this->cod_matricula]);

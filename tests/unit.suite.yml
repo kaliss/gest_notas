@@ -3,12 +3,12 @@
 # suite for unit (internal) tests.
 class_name: UnitTester
 modules:
-    enabled: [Asserts, UnitHelper, Db]
+    enabled: [Asserts, UnitHelper]
     config:
       Db:
         dsn: 'mysql:host=localhost;dbname=seminariointerdiocesano'
         user: 'root'
-        password: 'root'
+        password: ''
         dump: 'tests/_data/dump.sql'
         populate: true
         cleanup: false

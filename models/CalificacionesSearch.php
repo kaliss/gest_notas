@@ -40,12 +40,12 @@ class CalificacionesSearch extends Calificaciones
      */
     public function search($params)
     {
-        $query = Calificaciones::find();
+        $query = Calificaciones::find()->where(['id_est'=>$params]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
         ]);
-
+        /*
         $this->load($params);
 
         if (!$this->validate()) {
@@ -60,7 +60,15 @@ class CalificacionesSearch extends Calificaciones
             'id_grupo' => $this->id_grupo,
             'nota_final' => $this->nota_final,
         ]);
+        */
+        return $dataProvider;
+    }
 
+    public function searchpormatri($id, $matri)
+    {
+        $query = Calificaciones::find()->where(['id_est'=>$id, 'id_matricula'=>$matri]);
+        $dataProvider = new ActiveDataProvider(['query' => $query,]);
+        
         return $dataProvider;
     }
 }

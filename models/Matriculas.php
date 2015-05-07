@@ -12,9 +12,8 @@ use Yii;
  * @property integer $id_facultad
  * @property integer $curso
  * @property integer $semestre
- * @property string $fecha_matricula
  *
- * @property AvanceDePlan[] $avanceDePlans
+ * @property Calificaciones[] $calificaciones
  * @property Facultades $idFacultad
  */
 class Matriculas extends \yii\db\ActiveRecord
@@ -33,9 +32,8 @@ class Matriculas extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['cod_matricula', 'id_facultad', 'curso', 'semestre', 'fecha_matricula'], 'required'],
+            [['cod_matricula', 'id_facultad', 'curso', 'semestre'], 'required'],
             [['id_facultad', 'curso', 'semestre'], 'integer'],
-            [['fecha_matricula'], 'safe'],
             [['cod_matricula'], 'string', 'max' => 50],
             [['cod_matricula'], 'unique']
         ];
@@ -48,20 +46,19 @@ class Matriculas extends \yii\db\ActiveRecord
     {
         return [
             'id_matricula' => 'Id Matricula',
-            'cod_matricula' => 'Código de  Matricula',
+            'cod_matricula' => 'Código del Periodo',
             'id_facultad' => 'Facultad',
             'curso' => 'Curso',
             'semestre' => 'Semestre',
-            'fecha_matricula' => 'Fecha Matricula',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getAvanceDePlans()
+    public function getCalificaciones()
     {
-        return $this->hasMany(AvanceDePlan::className(), ['id_matricula' => 'id_matricula']);
+        return $this->hasMany(Calificaciones::className(), ['id_matricula' => 'id_matricula']);
     }
 
     /**
@@ -70,5 +67,10 @@ class Matriculas extends \yii\db\ActiveRecord
     public function getIdFacultad()
     {
         return $this->hasOne(Facultades::className(), ['id_facultad' => 'id_facultad']);
+    }
+
+    public function getInformacion()
+    {
+        return $this->cod_matricula.' :   '.$this->curso.'A  /  '.$this->semestre.'S'; 
     }
 }

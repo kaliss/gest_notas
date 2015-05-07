@@ -72,9 +72,9 @@ AppAsset::register($this);
                   ['label' => 'Acerca de', 'url' => ['/site/about']],
                   //['label' => 'Contact', 'url' => ['/site/contact']],
                   Yii::$app->user->isGuest ?
-                      ['label' => 'Login', 'url' => ['/site/login']] :
+                      ['label' => 'Login', 'url' => ['/user/security/login']] :
                       ['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
-                          'url' => ['/site/logout'],
+                          'url' => ['/user/security/logout'],
                             'linkOptions' => ['data-method' => 'post']],
               ],
           ]);
@@ -101,7 +101,7 @@ AppAsset::register($this);
                   </button>
                   <ul class="dropdown-menu content-btn-nav-sec" role="menu">
                     <li><?= Html::a('Calificaciones',['calificaciones/index']) ?></li>
-                    <li><?= Html::a('Matrículas',['matriculas/index']) ?></li>
+                    <li><?= Html::a('Matricular',['matricular/index']) ?></li>
                   </ul>
                 </div>
                 <div class="btn-group" role="group">
@@ -130,11 +130,12 @@ AppAsset::register($this);
                     <span class="caret"></span>
                   </button>
                   <ul class="dropdown-menu content-btn-nav-sec" role="menu">
+                    <li><?= Html::a('Facultades',['facultades/index']) ?></li>
+                    <li><?= Html::a('Periodos Escolares',['matriculas/index']) ?></li>
                     <li><?= Html::a('Diócesis',['diocesis/index']) ?></li>
                     <li><?= Html::a('Parroquias',['parroquias/index']) ?></li>
                     <li><?= Html::a('Parentezco',['parentezco/index']) ?></li>
                     <li><?= Html::a('Profesiones',['profesiones/index']) ?></li>
-                    <li><?= Html::a('Facultades',['facultades/index']) ?></li>
                     <li><?= Html::a('Tipos de Estudio',['tipos-de-estudio/index']) ?></li>
                     <li><?= Html::a('Tipos de Grupo',['tipos-de-grupo/index']) ?></li>
                   </ul>
@@ -146,9 +147,9 @@ AppAsset::register($this);
     </div>
 
     <footer class="footer">
-        <div class="container">
-            <p class="pull-left">&copy; Calificaciones <?= date('Y') ?></p>
-            <p class="pull-right"><?= Yii::powered() ?></p>
+        <div class="container-fluid">
+            <p class="pull-left">&copy; Seminario Interdiocesano Nacional "Nuestra Señora de Fátima" <?= date('Y') ?></p>
+            <p class="pull-right">Universidad Centroamericana (UCA)</p>
         </div>
     </footer>
 

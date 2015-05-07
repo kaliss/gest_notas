@@ -30,27 +30,34 @@ use yii\bootstrap\Tabs;
                 <div class="tab-pane active" id="personal">
                   <hr>
                   <div class="row">
-                    <div class="col-lg-6">
-                      <?= $form->field($modelEst, 'nombres_est')->textInput(['maxlength' => 50]) ?>
-                      <?= $form->field($modelEst, 'num_carnet_est')->textInput(['maxlength' => 50]) ?>
-                      <?= $form->field($modelEst, 'fecha_nac_est')->widget(
+                    <div class="col-lg-12">
+                      <div class="col-lg-6"><?= $form->field($modelEst, 'nombres_est')->textInput(['maxlength' => 50]) ?></div>
+                      <div class="col-lg-6"><?= $form->field($modelEst, 'apellidos_est')->textInput(['maxlength' => 50]) ?></div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="col-lg-6"><?= $form->field($modelEst, 'num_carnet_est')->textInput(['maxlength' => 50]) ?></div>
+                      <div class="col-lg-6"><?= $form->field($modelEst, 'cedula_est')->widget(\yii\widgets\MaskedInput::classname(), [
+                      'mask' => '999-999999-9999a',
+                  ]) ?></div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="col-lg-6"><?= $form->field($modelEst, 'fecha_nac_est')->widget(
                               DatePicker::className(), [
                                'inline' => false,
                                'clientOptions' => [
                                   'autoclose' => true,
                                   'format' => 'dd-M-yyyy'
                               ]
-                      ]);?>
-                      <?= $form->field($modelEst, 'telefono_est')->textInput(['maxlength' => 50]) ?>
-                    </div>
-                    <div class="col-lg-6">
-                      <?= $form->field($modelEst, 'apellidos_est')->textInput(['maxlength' => 50]) ?>
-                      <?= $form->field($modelEst, 'cedula_est')->textInput(['maxlength' => 50]) ?>
-                      <?= $form->field($modelEst, 'lugar_nac_est')->textInput(['maxlength' => 50]) ?>
-
+                      ]);?></div>
+                      <div class="col-lg-6"><?= $form->field($modelEst, 'lugar_nac_est')->textInput(['maxlength' => 50]) ?></div>
                     </div>
                     <div class="col-lg-12">
-                      <?= $form->field($modelEst, 'direccion_dom_est')->textInput(['maxlength' => 100]) ?>
+                      <div class="col-lg-6"><?= $form->field($modelEst, 'telefono_est')->widget(\yii\widgets\MaskedInput::classname(), [
+                      'mask' => '9999-9999',
+                  ]) ?></div>
+                    </div>
+                    <div class="col-lg-12">
+                      <div class="col-lg-12"><?= $form->field($modelEst, 'direccion_dom_est')->textInput(['maxlength' => 100]) ?></div>
                     </div>
                   </div>
                 </div>
@@ -88,7 +95,7 @@ use yii\bootstrap\Tabs;
                     </div>
                   </div>
                   <div class="form-group" align="right">
-                      <?= Html::submitButton($modelEst->isNewRecord ? 'Crear' : 'Actualizar', ['class' => $modelEst->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
+                      <?= Html::submitButton('Siguiente', ['class' => $modelEst->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
                   </div>
                 </div>
               </div>

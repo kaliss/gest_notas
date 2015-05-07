@@ -32,7 +32,7 @@ class Calificaciones extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['id_matricula', 'id_est', 'id_grupo', 'nota_final'], 'required'],
+            [['id_matricula', 'id_est', 'id_grupo', 'nota_final'], 'required', 'message'=>'Campo Obligatorio'],
             [['id_matricula', 'id_est', 'id_grupo', 'nota_final'], 'integer']
         ];
     }
@@ -43,9 +43,9 @@ class Calificaciones extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id_matricula' => 'Id Matricula',
-            'id_est' => 'Id Est',
-            'id_grupo' => 'Id Grupo',
+            'id_matricula' => 'Periodo de Estudio',
+            'id_est' => 'Estudiante',
+            'id_grupo' => 'Grupo',
             'nota_final' => 'Nota Final',
         ];
     }

@@ -16,7 +16,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'nombre_pariente')->textInput(['maxlength' => 50]) ?>
 
-    <?= $form->field($model, 'id_parentezco')->textInput() ?>
+    <?= $form->field($model, 'id_parentesco')->textInput() ?>
 
     <?= $form->field($model, 'id_profesion')->textInput() ?>
 

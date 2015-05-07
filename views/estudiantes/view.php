@@ -2,6 +2,7 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use yii\grid\GridView;
 
 /* @var $this yii\web\View */
 /* @var $modelEst app\models\Estudiantes */
@@ -36,6 +37,19 @@ $this->params['breadcrumbs'][] = $this->title;
                       'cedula_est',
                   ],
               ]) ?>
+              <?= GridView::widget([
+                  'dataProvider' => $dataProviderPar,
+                  //'filterModel' => $searchModel,
+                  'columns' => [
+                      //'id_pariente',
+                      //'id_est',
+                      'nombre_pariente',
+                      ['attribute'=>'id_parentesco',
+                      'value'=>'idParentesco.nombre_parentesco'],
+                      ['attribute'=>'id_profesion',
+                      'value'=>'idProfesion.nombre_profesion'],
+                  ],
+              ]); ?>
               <?= DetailView::widget([
                   'model' => $modelFam,
                   'attributes' => [
@@ -45,6 +59,17 @@ $this->params['breadcrumbs'][] = $this->title;
                       'cant_hermanos_est',
                   ],
               ]) ?>
+              <?= GridView::widget([
+                  'dataProvider' => $dataProviderAcad,
+                  //'filterModel' => $searchModel,
+                  'columns' => [
+                      //'id_estudio',
+                      //'id_est',
+                      'lugar_estudio',
+                      ['attribute'=>'id_tipo_estudio',
+                      'value'=>'idTipoEstudio.nombre_tipo_estudio'],
+                  ],
+              ]); ?>
               <?= DetailView::widget([
                   'model' => $modelSem,
                   'attributes' => [
@@ -56,6 +81,7 @@ $this->params['breadcrumbs'][] = $this->title;
                       'observaciones',
                   ],
               ]) ?>
+
               <p align="right">
                   <?= Html::a('Actualizar', ['update', 'id' => $modelEst->id_est], ['class' => 'btn btn-primary']) ?>
                   <?= Html::a('Eliminar', ['delete', 'id' => $modelEst->id_est], [
